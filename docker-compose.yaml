@@ -1,6 +1,8 @@
 version: "3.9"
 services:
   frontend:
+   environment:
+      BACKEND_URL: "https://5000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
     build:
       context: "./frontend-vue-js"
       dockerfile: "./Dockerfile"
@@ -9,6 +11,9 @@ services:
     networks:
       - events_net
   backend:
+      environment:
+      FRONTEND_URL: "https://80-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      BACKEND_URL: "https://5000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
     build:
       context: "./backend-flask"
       dockerfile: "./Dockerfile"
